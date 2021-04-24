@@ -41,6 +41,9 @@ public class Main {
         Hrrn hrrn = new Hrrn(jobs);
         hrrn.execute();
 
+        Spn spn = new Spn(jobs);
+        spn.execute();
+
     }
 
 

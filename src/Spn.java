@@ -1,21 +1,20 @@
 import java.util.ArrayList;
 
-public class Hrrn extends SchedulerAlgo{
+public class Spn extends SchedulerAlgo {
 
-    public Hrrn(ArrayList<JobEntity> list) {
+
+    public Spn(ArrayList<JobEntity> list) {
         super(list);
     }
 
     @Override
     public void execute() {
-
-        System.out.println("  Highest Response Ratio Next");
+        System.out.println("  SPN");
         System.out.println("  ==================");
         super.Print_Jobs();
 
         while (!this.jobsLeft.isEmpty())
         {
-
             Next_job();
 
             while (this.job.getRemaining_duration() > 0 ) // output the job
@@ -27,27 +26,21 @@ public class Hrrn extends SchedulerAlgo{
             }
 
             this.jobsLeft.remove(this.job);
-
         }
 
         reset_jobs();
-        }
-
+    }
 
     @Override
     public void Next_job() {
         get_Ready_jobs();
-       int max_ratio = Integer.MIN_VALUE;
-        int cur_ratio = -1;
-
         JobEntity min_Job = null;
-
-        for(JobEntity jObj : this.ready_job_list)
+        int min = 100000;
+        for(JobEntity jObj: this.ready_job_list)
         {
-            cur_ratio = jObj.getHRR(this.time_elapsed);
-            if(max_ratio < cur_ratio)
+            if(jObj.getOriginal_duration() < min)
             {
-                max_ratio = cur_ratio;
+                min =jObj.getOriginal_duration();
                 min_Job = jObj;
             }
 
@@ -56,13 +49,12 @@ public class Hrrn extends SchedulerAlgo{
         this.job = min_Job;
 
         this.ready_job_list.remove(min_Job);
-
     }
 
     public void get_Ready_jobs(){
         for(JobEntity jObj: this.jobsLeft)
         {
-            if(this.time_elapsed <= jObj.getOriginal_start_time())
+            if(this.time_elapsed >= jObj.getOriginal_start_time())
             {
                 this.ready_job_list.add(jObj);
             }

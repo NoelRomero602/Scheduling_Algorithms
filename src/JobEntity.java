@@ -5,9 +5,16 @@ public class JobEntity {
     private int remaining_duration = 0;
     private int original_duration = 0;
 
-   public int getHRR(int time_elapsed)
+    public int getOriginal_duration() {
+        return original_duration;
+    }
+
+    public int getHRR(int time_elapsed)
    {
-       return ((time_elapsed - original_start_time)+original_duration)/ original_duration;
+
+       int w_temp = (time_elapsed - original_start_time);
+       int ratio_temp = (w_temp + original_duration) / original_duration;
+       return ratio_temp;
    }
 
     public boolean isEqual(JobEntity jobj)

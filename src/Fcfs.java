@@ -33,12 +33,7 @@ public class Fcfs extends SchedulerAlgo {
          }
 
          // reset jobs for next schedular algo
-        for(JobEntity jobEntity: this.initial_jobList)
-        {
-            jobEntity.resetDuration();
-            jobEntity.resetStartTime();
-        }
-
+        reset_jobs();
     }
 
 

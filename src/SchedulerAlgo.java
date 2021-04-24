@@ -58,4 +58,13 @@ public abstract void execute();
 
     }
 
+    public void reset_jobs()
+    {
+        for(JobEntity jobEntity: this.initial_jobList)
+        {
+            jobEntity.resetDuration();
+            jobEntity.resetStartTime();
+        }
+    }
+
 }
